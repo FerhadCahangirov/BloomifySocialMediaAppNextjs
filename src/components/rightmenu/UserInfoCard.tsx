@@ -105,8 +105,14 @@ async function UserInfoCard({ user }: { user: User }) {
                         <span>Joined {formattedDate}</span>
                     </div>
                 </div>
-                <button className='bg-blue-500 text-white text-sm rounded-md p-2'>Follow</button>
-                <span className='text-red-400 self-end text-xs cursor-pointer'>Block User</span>
+                {currentUserId && currentUserId !== user.id && (
+                    <UserInfoCardInteraction
+                        userId={user.id}
+                        isUserBlocked={isUserBlocked}
+                        isFollowing={isFollowing}
+                        isFollowingSent={isFollowingSent}
+                    />
+                )}
             </div>
         </div>
     )
