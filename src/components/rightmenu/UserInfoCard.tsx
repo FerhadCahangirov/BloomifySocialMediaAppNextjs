@@ -5,6 +5,7 @@ import { User } from '@prisma/client'
 import { auth } from '@clerk/nextjs/server';
 import prisma from '@/lib/client';
 import UserInfoCardInteraction from "./UserInfoCardInteraction";
+import UpdateUser from './UpdateUser';
 
 async function UserInfoCard({ user }: { user: User }) {
     const createdAtDate = new Date(user.createdAt);
@@ -29,8 +30,7 @@ async function UserInfoCard({ user }: { user: User }) {
             },
         });
 
-        blockRes ? isUserBlocked = true : isUserBlocked = false;
-
+        blockRes ? (isUserBlocked = true) : (isUserBlocked = false);
         const followRes = await prisma.follower.findFirst({
             where: {
                 followerId: currentUserId,
@@ -38,8 +38,7 @@ async function UserInfoCard({ user }: { user: User }) {
             },
         });
 
-        followRes ? isFollowing = true : isFollowing = false;
-
+        followRes ? (isFollowing = true) : (isFollowing = false);
         const followReqRes = await prisma.followRequest.findFirst({
             where: {
                 senderId: currentUserId,
@@ -47,7 +46,7 @@ async function UserInfoCard({ user }: { user: User }) {
             },
         });
 
-        followReqRes ? isFollowingSent = true : isFollowingSent = false;
+        followReqRes ? (isFollowingSent = true) : (isFollowingSent = false);
     }
 
     return (
@@ -55,9 +54,16 @@ async function UserInfoCard({ user }: { user: User }) {
             {/* TOP */}
             <div className="flex justify-between items-center font-medium">
                 <span className='text-gray-500'>User Information</span>
-                <Link href="/" className='text-blue-500 text-xs'>
-                    See All
-                </Link>
+                {
+                    currentUserId === user.id ? (
+                        <UpdateUser />
+                    ) : (
+                        <Link href="/" className='text-blue-500 text-xs'>
+                            See All
+                        </Link>
+                    )
+                }
+
             </div>
             {/* BOTTOM */}
             <div className="flex flex-col gap-4 text-gray-500">
