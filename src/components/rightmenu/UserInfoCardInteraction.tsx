@@ -1,3 +1,5 @@
+"use client"
+
 import { switchBlock, switchFollow } from "@/lib/action";
 import { useOptimistic, useState } from "react";
 
@@ -75,3 +77,5 @@ const UserInfoCardInteraction = ({
         </>
     )
 }
+
+export default UserInfoCardInteraction;

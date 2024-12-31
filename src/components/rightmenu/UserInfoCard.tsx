@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { User } from '@prisma/client'
 import { auth } from '@clerk/nextjs/server';
 import prisma from '@/lib/client';
+import UserInfoCardInteraction from "./UserInfoCardInteraction";
 
 async function UserInfoCard({ user }: { user: User }) {
     const createdAtDate = new Date(user.createdAt);
