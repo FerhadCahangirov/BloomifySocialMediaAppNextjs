@@ -30,12 +30,12 @@ const UpdateUser = ({ user }: { user: User }) => {
                 Update
             </span>
             {open && (
-                <div className="absolute w-screen h-screen top-0 left-0 bg-black bg-opacity-65 flex items-center justify-center z-50 ">
+                <div className="fixed w-screen h-screen top-0 left-0 bg-black bg-opacity-65 flex items-center justify-center z-50 overflow-hidden">
                     <form
                         action={(formData) =>
                             formAction({ formData, cover: cover?.secure_url || "" })
                         }
-                        className="p-12 bg-white rounded-lg shadow-md flex flex-col gap-2 w-full md:w-1/2 xl:w-1/3 relative"
+                        className="p-12 bg-white rounded-lg shadow-md flex flex-col gap-2 w-full md:w-1/2 relative max-h-screen overflow-y-auto"
                     >
                         {/* TITLE */}
                         <h1>Update Profile</h1>
@@ -44,7 +44,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                         </div>
                         {/* COVER PIC UPLOAD */}
                         <CldUploadWidget
-                            uploadPreset="social"
+                            uploadPreset="bloomify"
                             onSuccess={(result) => setCover(result.info)}
                         >
                             {({ open }) => {
